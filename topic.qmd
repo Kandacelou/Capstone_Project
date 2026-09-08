@@ -1,0 +1,9 @@
+---
+title: "DS Capstone Project Topic"
+format: pdf
+editor: visual
+---
+
+## Topic Description
+
+In a California Politics and Policy course I took last year with my Data Science advisor, Sara Sadhwani, I proposed a new approach to California's minimum wage laws. Specifically, I suggested for the state to set a baseline statewide minimum wage (i.e., \$16.90) and increase annually based on CPI-W increases in Metropolitan Statistical Areas (MSAs), to ensure more accurate wage indexes. Thus, for my Data Science Capstone project, I intend to use a counterfactual policy simulation to depict what California's minimum wages would have looked like for the 2026 fiscal year under my alternative policy rule in comparison to observed reality. I will use publicly available government inflation data - the CPI-W data published by the U.S. Bureau of Labor Statistics for individual California metro areas - to complete the modeling process.
