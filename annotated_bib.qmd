@@ -4,14 +4,26 @@ format: pdf
 editor: visual
 ---
 
-## Source #1 {style="color: pink"}
+# Source #1
+
+## Title of Source #1
 
 Description
 
-## Source #2 {style="color: pink"}
+# Data Sources
 
-Description
+## Inventory of US City and County Minimum Wage Ordinances - UC Berkeley Labor Center 
 
-## Source #3 {style="color: pink"}
+The UC Berkeley Labor Center published the *Inventory of US City and County Minimum Wage Ordinances* report on July 23, 2026. This report lists only California localities (cities and counties) whose minimum wages were set by local ordinances, not by state law. I will use this data set in showing the true minimum wage rates for these cities/counties, divided into their respective Metropolitan Statistical Areas (MSAs), for the 2026 fiscal year.
 
-Description
+## Consumer Price Index - U.S. Bureau of Labor Statistics 
+
+The U.S. Bureau of Labor Statistics published various Consumer Price Index reports for heavily populated Western Metropolitan Statistical Areas (MSAs). This includes reports for the areas of:
+
+1.  San Francisco-Oakland-Hayward,
+
+2.  Los Angeles-Long Beach-Anaheim, and
+
+3.  San Diego-Carlsbad.
+
+I will be using these reports to analyze the CPI-U fluctuations of their respective MSA and adjust their inflation rates as a group, rather than individual cities, from a baseline minimum wage.
