@@ -1,0 +1,17 @@
+---
+title: "Annotated Bibliography"
+format: pdf
+editor: visual
+---
+
+## Source #1 {style="color: pink"}
+
+Description
+
+## Source #2 {style="color: pink"}
+
+Description
+
+## Source #3 {style="color: pink"}
+
+Description
