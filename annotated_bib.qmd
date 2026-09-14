@@ -4,11 +4,15 @@ format: pdf
 editor: visual
 ---
 
-# Source #1
+# Literature Review
 
-## Title of Source #1
+## Minimum Wage Basics: Local Minimum Wage Laws - National Employment Law Project (NELP) 
 
-Description
+Yannet Lathrop, a writer for the National Employment Law Project (NELP), published *Minimum Wage Basics: Local Minimum Wage Laws* on July 2, 2025. This document explains the motivation behind U.S. localities setting their own minimum wage rates, as opposed to adopting either the federal or their state wage. The advantages to adopting a local minimum wage include: 1) better correspondence to higher local living costs, and 2) the ability to surpass slow or unwilling state legislatures. It also provides historical context, describing how within the past decade there has been a sudden and drastic increase in minimum wages set by local jurisdictions. This will serve as one of the fundamental pieces of literature in *support of* local minimum wage increases (as opposed to reverting to a statewide wage umbrella) - which is what I will be simulating, but at a more restricted level.
+
+## California Code, Labor Code - LAB 1182.12
+
+California Labor Code Section 1182.12 is the statue for the state's baseline minimum wage and annual inflation adjustments. Section C(1) states how "the calculation \[for the minimum wage\] shall increase... by the lesser of 3.5 percent and the rate of change in the averages of the most recent July 1 to June 30, inclusive, period over the preceding July 1 to June 30, inclusive, period for the United States Bureau of Labor Statistics nonseasonally adjusted United States Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W). This result shall be rounded to the nearest ten cents (\$0.10)." I will apply this same formula/method in calculating MSA minimum wages by multiplying a baseline minimum wage by its localized inflation rate and rounding the amount to the nearest ten cents.
 
 # Data Sources
 
