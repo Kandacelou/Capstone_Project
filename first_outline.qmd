@@ -1,0 +1,17 @@
+---
+title: "first outline"
+format: pdf
+editor: visual
+---
+
+# Policy Brief
+
+This is a description of my policy brief.
+
+# Alternative Wage Simulation 
+
+Here will be the code for my alternative wage simulation as well as the organization for the actual wages set into place - for three MSAs in California.
+
+# References 
+
+This will be a list of my references used throughout my brief in APA format.
