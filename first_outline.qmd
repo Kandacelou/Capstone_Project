@@ -4,6 +4,8 @@ format: pdf
 editor: visual
 ---
 
+Prof. Hardin you can just skip to the alternative wage simulation! Everything else is copied and pasted from the policy brief I completed last year (it's long + boring, no need to read).
+
 # Abstract
 
 \[This will be the abstract of my simulation, providing a brief summary of my capstone project.\]
