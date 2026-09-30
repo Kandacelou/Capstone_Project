@@ -4,14 +4,128 @@ format: pdf
 editor: visual
 ---
 
+# Abstract
+
+\[This will be the abstract of my simulation, providing a brief summary of my capstone project.\]
+
+# Introduction
+
+California annually adjusts the minimum wage for its workers to account for state inflation increases while actively combatting our high cost of living. However, as prices continue to surge, our state and local governments tend to disagree with the rate at which our minimum wage should be. Therefore, although as of January 1st, 2026, the statewide minimum wage is \$16.90, local governments are able to determine their own rates as long as they meet that baseline - this results in variances ranging anywhere from \$16.90 to \$20.25, and will most likely continue to raise in years to come. However, minimum wage policy also varies by industry as a result of state legislation such as Assembly Bill 1228. The law mandates a \$20 hourly minimum wage for workers at fast-food chains with more than 60 locations nationwide. This brief seeks to analyze the economic and social consequences of minimum wage increases from a city-centric lens. 
+
+Initiatives to continue raising the minimum wage annually exemplify that our statewide minimum wage is not enough to live comfortably in California; thus, the solution to the problems which stem from policy implementation (i.e., inflation, job losses, cutting hours, etc.) isn’t to cap the minimum wage, but to adjust the approach. Voter behavior suggests skepticism toward broader wage increases, as seen in a “no” vote to Proposition 32, which proposed raising the statewide minimum wage to \$18 by 2026. Therefore, California must set higher rates while incentivizing businesses to not hike their pieces - ultimately re-establishing voter confidence. This can be accomplished by:
+
+1.  Effective immediately, suspending any further increases under AB 1228 unless the local or state minimum wage exceeds \$20;
+
+2.  Setting a baseline statewide minimum wage (i.e., \$16.90) and increasing annually based on CPI-W increases in Metropolitan Statistical Areas (MSAs), to ensure more accurate wage indexes; and 
+
+3.  Expanding refundable tax credits for businesses at a state level, providing additional government assistance simultaneously with the minimum wage increases.
+
 # Policy Brief
 
-This is a description of my policy brief.
+## Policy Issue
 
-# Alternative Wage Simulation 
+The minimum wage rate is adjusted annually for inflation based on the national Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W); therefore, our statewide baseline is not reflective of the state’s economic condition - being the fourth largest economy in the world. Additionally, while the state and cities independently continue to raise this wage, businesses balance these higher labor costs by increasing consumer prices. This has ultimately resulted in the erosion of voter confidence in systematic wage increases, as they are continuously met by balancing, or outpacing, costs.
 
-Here will be the code for my alternative wage simulation as well as the organization for the actual wages set into place - for three MSAs in California.
+## Background
 
-# References 
+A “living wage” refers to a wage level that offers workers the ability to support families, maintain self-respect, and have the means and the leisure to participate in the civic life of the nation. Robert Pollin’s research shows that, in 2007, the national poverty line for a family of four was roughly 40% higher than the official Census Bureau measure, while the cost of living in the Los Angeles area exceeded the national average by about 25%. Despite this elevated cost of living, California’s minimum wage in 2007 (\$7.50) remained well below even conservative estimates of a living wage for workers in the Los Angeles region. Although this represented an 11.1% increase from the 2006 minimum wage of \$6.75, it was still insufficient to meet the region’s high living costs. 
+
+Similarly, a 2013 report by the UC Berkeley Labor Center found that despite high levels of employment in the fast food industry, “people working in fast-food jobs are more likely to live in or near poverty. One in five families with a member holding a fast-food job has an income below the poverty line, and 43 percent have an income two times the federal poverty level or less. Even full-time hours are not enough to compensate for low wages. The families of more than half of the fast-food workers employed 40 or more hours per week are enrolled in public assistance programs.”
+
+These unsatisfactory conditions for minimum wage earners prompted cities and/or counties to set ordinances to increase local minimum wage rates, ultimately pressuring the state to conform to their wage-increase demands. For example, “between November 2014 and January 2016, six local jurisdictions approved \$15 minimum wage ordinances, and three others approved smaller increases. Following those local increases, in April 2016, \[then\] Governor Jerry Brown signed a state bill (SB3) phasing a \$15 minimum wage.” The practice of local implementation has become more popular in the recent decade as before 2012, only five US localities had minimum wage laws, but currently 69 counties/cities across the nation do. 
+
+However, local ordinances are not the only strategies prevalent across California, as statewide legislation for targeted working groups are also practiced. Assembly Bill 1228 (AB1228), “required the hourly minimum wage for fast food restaurant employees to be \$20 per hour, effective April 1, 2024, and thereafter authorize \[a Fast Food\] Council to establish minimum wages for fast food restaurant employees to take effect on an annual basis, beginning on January 1, 2025.” It established the Council within the Department of Industrial Relations (DIR) to oversee the “adoption and evaluation of health, safety, and employment standards for fast food restaurant employees,” and consists of:
+
+1.  Two representatives of the fast food restaurant industry.
+
+2.  Two representatives of fast food restaurant franchisees or restaurant owners.
+
+3.  Two representatives of fast food restaurant employees.
+
+4.  Two representatives of advocates for fast food restaurant employees.
+
+5.  One unaffiliated member of the public who is not an owner, franchisee, officer, or employee in the fast food industry; who is not an employee or officer of a labor organization or a member of a labor organization representing fast food restaurant employees; and who has not received income from the fast food industry or any labor organization for a period of two years prior to appointment.
+
+6.  One representative from the DIR - nonvoting member.
+
+7.  One representative from the Governor’s Office of Business and Economic Development (GO-Biz) - nonvoting member. 
+
+Similar to the Olympic Wage Initiative, according to former Assemblymember Chris Holden - the author of the bill - AB1228 “creates a path forward to resolve community concerns…, while preserving fast food workers’ hard fought efforts to secure a seat at the table and means to raise standards.” 
+
+## Information Pertinent to the Issue
+
+According to the California State Library,“At \$16.90, California’s minimum is the third highest among the states, narrowly behind Washington state (\$17.13) and Connecticut (\$16.94), which also trails Washington, D.C. (\$17.90).” Interestingly enough, the value of both the state and federal minimum wages peaked in 1968 - with California’s \$1.65 minimum wage in 1968 translating to \$15.45 today, according to the CPI, or \$17.51, according to the CA-CPI. However, “California’s annual minimum wage adjustments are based on the national \[Consumer Price Index for Urban Wage Earners and Clerical Workers (CPI-W)\], so if recent trends \[continue\], local purchasing power \[will\] continue to slip further behind the 1968 level.” This is because federal levels of inflation are often lower than the state’s. Therefore, California’s employment of nationwide statistics, as opposed to a state-centric measure, could actually dwindle its minimum wage in the long-run, when compared to the state’s historical wages. 
+
+Moreover, although labor unions play a significant role in advocating for minimum wage increases, policy implementation can actually decrease membership throughout the state. Clemens and Strain found that individuals aged 16-21 are less likely to belong to unions following minimum wage increases (although this may be due to their restaurant experience being short lived). They also reported negative, though more modest and statistically insignificant, effects for food-service and retail workers ages 22-29. Ultimately, for all minimum wage earners below age 30, there is a decline in union membership beginning over the 12 months immediately preceding the enactment of statutory minimum wage increases. This has serious social implications for Californian youths, who may be less likely to unionize due to them being one of the main targets for minimum wage increases. If this trend continues, this could also potentially be a motivator for these cities to raise their wages for the ulterior motive of decreasing union membership. 
+
+Additionally, minimum wage increases, specifically in sudden, more substantial implementations such as AB1228, can hurt consumers and employees economically more than it benefits. As of June 5, 2025, the federal Bureau of Labor Statistics revealed a “staggering 36,565 fast food jobs \[had\] been lost since September 2023 when the \$20 per hour minimum wage law, AB 1228, was signed into law.” Similarly, as of April 1, 2025, “the Berkeley Research Group also found that fast food prices in California \[had\] gone up by 14.5% - about double the national average of 8.2%” and “89% of all restaurants in the state \[reduced\] employee hours to offset rising costs with, 87% planning additional cuts \[for 2026\].”
+
+For example, a study conducted by Griswold Center for Economic Policy Studies found that “McDonald’s restaurants pass through the higher costs of minimum wage increases in the form of higher prices of the Big Mac sandwich.” More specifically, Ashenfelter and Jurajda’s research suggests that 30% of the cost of a Big Mac is driven by labor costs. The average Big Mac Meal cost in Los Angeles for 2026 ranging from \$10.50 to \$14.00, depending on the location, taxes, and meal size, while the meal can be as cheap as \$8 in cheaper states.
+
+These inflationary consequences have ultimately eroded voter confidence for increasing the minimum wage as well. Proposition 32 was on the ballot in California as an initiated state statute on November 5, 2024, but was defeated with a 50.71% No vote majority threshold. It would have increased the state minimum wage to \$18 an hour by 2026 for all employers. After reaching \$18, the minimum wage would have been tied to the CPI-W for inflation adjustments. Although early on, support for Prop 32 was high due to California’s high cost of living and high inflation being a key issue, with the “rising number of job losses tied to the fast food minimum wage hike, \[voters were worried\] that a statewide raise could lead to even more losses.” Jot Condie, President and CEO of the California Restaurant Association, noted after the failure of Prop 32 that “voters know who pays for wage mandates like Proposition 32 - they do.” Thus, the fear of further economic damage tied to another minimum wage increase resulted in the loss of a further wage increase. 
+
+## Stakeholder Analysis
+
+Despite Assembly Bill 1228’s negative consequences, it was written, supported, and ultimately signed into law in an attempt to minimize California’s poverty crisis. The argument in support of the bill reasons that “for the last decade, fast-food cooks, cashiers, and baristas in California have been sounding the alarm on the poverty pay and unsafe working conditions plaguing the industry. Fast-food workers and community allies across the state have demanded that workers get a seat at the table to resolve these critical issues.” 
+
+More specifically, AB 1228 was supported by four key stakeholders: 1) the International Franchise Association (IFA), 2) the National Restaurant Association, 3) Save Local Restaurants, and 4) the Service Employees Union International (SEIU). Together, they expressed that “this agreement \[reflected\] the best interest of the workers, local franchised restaurant owners and restaurant brands by: 1) protecting the franchise business model that provides opportunities for thousands of diverse Californians to become small business owners; 2) providing meaningful wage increases for workers; and 3) eliminating significant - and potentially existential - threats, costs, and regulatory burdens targeting local restaurants in California.”
+
+IFA had been at the forefront of fighting against AB 257 (the Fast Recovery Act, in which AB 1228 is amended from), with concerns that the bill would “have created an unelected wage and labor council with lawmaking authority for California’s quick-service restaurant industry, raising prices by an estimated 20% at impacted restaurants and forcing restaurant owners to close their doors.” AB 257 would have been voted on through a referendum on the 2024 ballot, however, instead of signed as a legislative agreement. They stated that this “costly 2024 ballot measure fight” would have amounted to hundreds of millions of dollars. Therefore, collectively, the IFA’s opposition of AB 257 and support of AB 1228 removed the ability of the voters to decide the wage increase. 
+
+However, the American Association of Franchisees and Dealers starkly contrasted the three stakeholders listed above, stating that “in significant disregard to hearing the voices of small business franchisee owners, the negotiated settlement was made between the International Franchise Association (IFA), the National Restaurant Association (NRA), and the Service Employees International Union (SEIU).” They further argued that “if \[AB1228 were\] signed, the result would be onerous to the franchisee community who would have to bear the primary brunt of this settlement, which would not only significantly increase labor costs thereby forcing franchisees to increase costs to consumers; this, in turn, also benefits franchisors with a larger royalty base.” In addition to their financial concerns, however, they expressed their worries about political corruption and setting a controversial precedent. The AAFD stated that “this development \[was\] a prime example of behind-the-scenes political maneuvering, raising concerns about transparency and fairness. Given these circumstances, the AAFD \[could not\] endorse legislation crafted behind closed doors, which disproportionately affects its members and lacks transparency in its decision-making process. It also sets a dangerous precedent when minimum wage legislation targets franchised establishments and specifically quick service restaurants.” 
+
+## Policy Options
+
+In regards to AB 1228, although the Fast Food Council was authorized to, starting January 1, 2025, annually increase the minimum wage for fast food restaurants by up to 3.5% or the increase in the applicable consumer price index (CPI-W) - whichever is smaller -, there has currently been no such increase from \$20 per hour. Despite congregating every six months to discuss the possibility of a wage increase, more than 1,000 local restaurants owners wrote an open letter to Governor Gavin Newsom in January, 2025, “urging the Fast Food Council to reject any additional wage increases for fast food workers,” claiming that an additional wage hike would “cripple thousands of small business owners like \[them\] who \[were\] already struggling to survive the \$20/hour minimum wage, \[their\] customers, and \[their\] employees.” AB 1228 is effective only until January 1, 2029.
+
+As of January 1st, 2026, West Hollywood has the highest local minimum wage set at \$20.25 - \$3.35 higher than the current statewide wage floor (\$16.90). However, the “Olympic Wage Initiative,” presented by Unite Here Local 11 and passed by the Los Angeles City Council on May 23, 2025, is set to raise the minimum wage for LA hotels and city airports to \$30 by July 1, 2028. The purpose of this wage increase is to mitigate the expected record profits from the 2026 World Cup and the 2028 Olympics - “as wages have failed to keep pace with soaring housing costs, many working Angelinos have been required to spend an increasing share of their income to stay housed, to live far away from their workplaces, and in some cases to lose shelter altogether.”
+
+But the county of LA is not the only region which is facing pressure to raise their minimum wage. The Oakland and Alameda “Living Wage for All” Campaign launched in March, 2026, and “filed two ballot initiatives for the November 2026 ballot to increase the minimum wage for the city of Oakland and Alameda county to \$30 an hour by 2030 for large employers.” These measures would require “businesses with more than 100 employees and more than \$1 million in revenue to increase the minimum wage to \$30 by 2030. Smaller businesses would have until 2035 and 2037 to apply those wages.” With the cost of living continuing to rise across the Bay Area, wages aren’t increasing in parallel, therefore “in that gap is human suffering” - with minimum wage earners in these areas being left unhoused or housing insecure.  
+
+To enhance security for restaurants in cities where the minimum wage is higher than other regions, local improvements are currently being employed to maximize business input. For example, the city of Santa Monica recently approved a \$63 million realignment plan for Downtown Santa Monica. To create a more welcoming and thriving downtown, this initiative will plant “fresh landscaping with approximately 300 California native plants at the 4th/5th Street off-ramp,” clear “brush and debris at the 20th Street off-ramp and adjective protected bike lines,” and install “new curbs, driveway, and sidewalk” as well as “street repairs near Broadway and 6th street.” This “glow-up” also quickened the permitting process, increased tenant improvements, and created a new approach to solving homelessness. 
+
+In an interview with current mayor Caroline Torosis, she explained that Santa Monica’s business culture is largely “created on the backs of tourism.” As a result, the city’s ongoing improvements are intended to increase business attraction and consumer activity. Torosis argued that “if you ask your businesses to pay their workers more, business needs to thrive.” In this way, businesses may feel less pressure to sharply increase prices when local governments actively invest in infrastructure, tourism, and commercial development that help offset operating costs and attract additional customers. Therefore, Santa Monica allows its minimum wage earners to have a rate of \$17.81 without a highly inflative response from local restaurants. 
+
+## Recommendations
+
+California must set higher minimum wage rates while incentivizing businesses to not hike their pieces - ultimately re-establishing voter confidence. This can be accomplished by:
+
+1.  Effective immediately, suspending any further increases under AB 1228 unless the local or state minimum wage exceeds \$20;
+
+2.  Setting a baseline statewide minimum wage (i.e., \$16.90) and increasing annually based on CPI-W increases in Metropolitan Statistical Areas (MSAs), to ensure more accurate wage indexes; and 
+
+3.  Expanding refundable tax credits for businesses at a state level, providing additional government assistance simultaneously with the minimum wage increases.
+
+	By suspending any further increases under AB 1228 unless the local or state minimum wage exceeds \$20, effective immediately, California can minimize the labor-cost instability that many local businesses are currently facing. In turn, this will also provide time to re-establish voter confidence in possible future wage increases on the ballot. Following the failure of Proposition 32, which sought to raise the statewide minimum wage to \$18 per hour by 2026, concerns surrounding the economic consequences of AB 1228 became increasingly evident. Combined with growing pressure from business owners opposing additional wage increases from the Fast Food Council, the outcome suggests that many Californians support pausing further fast-food wage hikes. It can therefore be inferred that the International Franchise Association (IFA) was concerned not only about the financial costs associated with a minimum wage ballot initiative, but also about the possibility of a majority “Yes” vote. Prior to 2023, California had only voted on one statewide minimum wage proposition - Proposition 210 in 1996 - nearly three decades before the passage of AB 257. 
+
+Establishing a statewide minimum wage baseline that adjusts annually according to CPI-W increases within Metropolitan Statistical Areas (MSAs) would allow California to better account for regional differences in cost of living. Under the current statewide system, annual wage increases are tied to broader state inflation measures that often fail to reflect the significant economic variation between regions such as Los Angeles, San Francisco, and inland communities throughout the Central Valley and Inland Empire. As a result, some workers continue to struggle with rising housing and transportation costs despite statewide increases, while businesses in lower-cost regions face disproportionate financial pressure from uniform wage mandates. 
+
+Indexing wage increases to local CPI-W data would create a more flexible and economically responsive framework by ensuring that wages rise in accordance with actual regional inflation trends. This policy would also help address the growing issue of long-distance commuting throughout California. Many workers employed in high-cost urban centers are increasingly forced to live in more affordable surrounding regions and commute substantial distances to work due to housing prices. For example, citizens may live in Santa Monica and commute to West Hollywood to receive a wage that is \$3 more per hour than the city they reside. By implementing more regionally responsive wage standards, workers would be better equipped to manage transportation and living expenses associated with commuting, while employers in lower-cost regions would avoid being subject to wage increases disconnected from their local economies. This approach would improve long-term policy stability by reducing the need for large ballot-driven wage increases, which often generate political polarization and uncertainty for employers.
+
+Expanding refundable tax credits for businesses at the state level would further ease the economic burden associated with minimum wage increases while preserving higher earnings for workers. Although raising wages can improve financial security for low-income employees, businesses - particularly small restaurants and independently owned franchises - often respond by increasing prices, reducing employee hours, or slowing hiring. State-supported refundable tax credits could offset a portion of rising labor costs during adjustment periods, allowing businesses to maintain employment levels without transferring the full burden onto consumers. In addition, these credits would create a more cooperative relationship between employers and the state by demonstrating that wage policy is not solely punitive toward businesses. By pairing wage increases with targeted economic assistance, California could reduce opposition to future minimum wage legislation while promoting both worker protections and long-term economic stability.
+
+# Alternative Wage Simulation
+
+## Hypothesis
+
+This Data Science Capstone project seeks to simulate the second proposition I established in my policy brief:
+
+"Setting a baseline statewide minimum wage (i.e., \$16.90) and increasing annually based on CPI-W increases in Metropolitan Statistical Areas (MSAs), to ensure more accurate wage indexes."
+
+Given my proposal,
+
+## Simulation
+
+\[Here will be the code for my alternative wage simulation as well as the organization for the actual wages set into place - for three MSAs in California\]
+
+## Results
+
+\[Here will be the results section of my simulation, relating it back to my hypothesis\].
+
+# Conclusion
+
+\[Depending on the results of my simulation, this will include a discussion of whether or not this policy change is feasible + desirable to adopt on a statewide level\].
+
+# References
 
 This will be a list of my references used throughout my brief in APA format.

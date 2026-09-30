@@ -6,7 +6,7 @@ editor: visual
 
 # Literature Review
 
-## Minimum Wage Basics: Local Minimum Wage Laws - National Employment Law Project (NELP) 
+## Minimum Wage Basics: Local Minimum Wage Laws - National Employment Law Project (NELP)
 
 Yannet Lathrop, a writer for the National Employment Law Project (NELP), published *Minimum Wage Basics: Local Minimum Wage Laws* on July 2, 2025. This document explains the motivation behind U.S. localities setting their own minimum wage rates, as opposed to adopting either the federal or their state wage. The advantages to adopting a local minimum wage include: 1) better correspondence to higher local living costs, and 2) the ability to surpass slow or unwilling state legislatures. It also provides historical context, describing how within the past decade there has been a sudden and drastic increase in minimum wages set by local jurisdictions. This will serve as one of the fundamental pieces of literature in *support of* local minimum wage increases (as opposed to reverting to a statewide wage umbrella) - which is what I will be simulating, but at a more restricted level.
 
@@ -16,11 +16,11 @@ California Labor Code Section 1182.12 is the statue for the state's baseline min
 
 # Data Sources
 
-## Inventory of US City and County Minimum Wage Ordinances - UC Berkeley Labor Center 
+## Inventory of US City and County Minimum Wage Ordinances - UC Berkeley Labor Center
 
 The UC Berkeley Labor Center published the *Inventory of US City and County Minimum Wage Ordinances* report on July 23, 2026. This report lists only California localities (cities and counties) whose minimum wages were set by local ordinances, not by state law. I will use this data set in showing the true minimum wage rates for these cities/counties, divided into their respective Metropolitan Statistical Areas (MSAs), for the 2026 fiscal year.
 
-## Consumer Price Index - U.S. Bureau of Labor Statistics 
+## Consumer Price Index - U.S. Bureau of Labor Statistics
 
 The U.S. Bureau of Labor Statistics published various Consumer Price Index reports for heavily populated Western Metropolitan Statistical Areas (MSAs). This includes reports for the areas of:
 
