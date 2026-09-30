@@ -112,7 +112,7 @@ This Data Science Capstone project seeks to simulate the second proposition I es
 
 "Setting a baseline statewide minimum wage (i.e., \$16.90) and increasing annually based on CPI-W increases in Metropolitan Statistical Areas (MSAs), to ensure more accurate wage indexes."
 
-Given my proposal,
+Given my proposal, I hypothesize that raising local minimum wages based on MSA inflation rates will narrow economic gaps across California. Thus, regions that are similar in their costs of living will have similar wages when adjusted to a unanimous baseline of \$16.90.
 
 ## Simulation
 
