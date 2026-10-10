@@ -1,0 +1,146 @@
+---
+title: "project draft"
+format: pdf
+editor: visual
+execute:
+  message: false
+  warning: false
+---
+
+```{r}
+# load in packages
+library(tidyverse)
+library(readr)
+library(readxl)
+
+## Index of ALL California Cities/Counties with wage variance
+
+# read in CSV file
+cali_wages <- read_csv("CaliforniaCityMinimumWages.csv")
+ggplot(cali_wages, aes(x = Rate, y = Locality)) +
+  geom_col() +
+  geom_text(aes(label = paste("$", format(round(Rate, 2)))),
+            hjust = -0.1,
+            size = 2) +
+  labs(
+    y = "California Cities",
+    x = "Minimum Wage Rates",
+    title = "All California Cities with Wage Variance"
+  ) +
+  theme(
+    axis.text.y = element_text(size = 6)
+  )
+```
+
+```{r}
+## FOR Los Angeles-Long Beach-Anaheim MSA!!
+
+# create data set with LA MSA wages
+og_df <- data.frame(
+  cities = rep(c("Los Angeles", "Long Beach", "Anaheim")),
+  wages = c(18.42, 16.90, 16.90)
+)
+# plot original wages
+ggplot(og_df, aes(x = cities, y = wages)) +
+  geom_col() +
+  labs(
+    x = "Cities",
+    y = "Minimum Wage Rates",
+    title = "Actual 2026 Wages for Los Angeles-Long Beach-Anaheim MSA"
+  )
+
+# read in excel file 
+LA_MSA <- read_excel("LA_MSA.xlsx")
+# remove unnecessary rows
+newLA_df <- LA_MSA[-c(1:10), ] # now df displays CPI-W by month and year 
+
+# solve for the rate of change 
+new_avg <- mean(c(as.numeric(newLA_df[12, 2:7]), 
+                  as.numeric(newLA_df[11, 8:13])), na.rm = TRUE)
+old_avg <- mean(c(as.numeric(newLA_df[11, 2:7]),
+                  as.numeric(newLA_df[10, 8:13])), na.rm = TRUE)
+x <- new_avg/old_avg 
+# finding the average for 2026, then diving by the average for 2025
+
+# calculate new MSA wage 
+LAnew_wage <- (16.50 * x)
+
+# create data set which combines actual wages with the new MSA wage
+compare_LAdf <- data.frame(
+  cities = c("Los Angeles", "Long Beach", "Anaheim", "MSA Wage"),
+  wages = c(18.42, 16.90, 16.90, LAnew_wage)
+)
+
+# plot new and old wages
+ggplot(compare_LAdf, aes(x = cities, y = wages)) +
+  geom_col() +
+  geom_text(aes(label = paste("$", format(round(wages, 2)))), 
+            vjust = -0.25) +
+  labs(
+    x = "Cities",
+    y = "Minimum Wage Rates",
+    title = "Hypothetical 2026 Wages for Los Angeles-Long Beach-Anaheim MSA"
+  )
+```
+
+```{r}
+# make year column as.numeric
+newLA_df[[1]] <- as.numeric(newLA_df[[1]], na.rm = TRUE)
+
+# create a function to calculate rates of changes for the past 5 years
+avg_function <- function(year) {
+  year_col <- newLA_df[[1]]
+  prev <- newLA_df[year_col == year - 1, 8:13]
+  now <- newLA_df[year_col == year, 2:7]
+  mean(as.numeric(c(unlist(prev), unlist(now))), na.rm = TRUE)
+}
+years <- 2022:2026 # the past 5 years
+
+# create a data frame using the rates from above
+rates <- data.frame(
+  year = years,
+  new_avg = sapply(years, avg_function),
+  old_avg = sapply(years - 1, avg_function)
+)
+rates$x <- rates$new_avg / rates$old_avg # calculate rates of change
+
+# calculate hypothetical minimum wages for the LA MSA area from 2022-2026
+year_one <- rates$x[1] * 14.00 # $14.00 was California's statewide minimum wage in 2021
+year_two <- rates$x[2] * year_one # 2023
+year_three <- rates$x[3] * year_two # 2024
+year_four <- rates$x[4] * year_three # 2025
+year_five <- rates$x[5] * year_four # 2026
+
+# create data frames for the hypothetical, California actual, and LA actual
+hypo_wagedf <- data.frame(
+  year = rates$year,
+  wage = c(year_one, year_two, year_three, year_four, year_five)
+) # hypothetical
+
+cali_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("15.00", "15.50", "16.00", "16.50", "16.90")
+) # california
+
+LA_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("16.04", "16.78", "17.28", "17.87", "18.42")
+) # LA
+
+# rename to create separate columns
+hypo_wagedf$series <- "Hypothetical"
+cali_wagedf$series <- "California"
+LA_wagedf$series <- "Los Angeles"
+
+# collapse into one data frame
+all_wages <- rbind(hypo_wagedf, cali_wagedf, LA_wagedf)
+all_wages$wage <- as.numeric(all_wages$wage) # convert wages from strings into numbers
+
+# line plot for all wages!
+ggplot(all_wages, aes(x = year, y = wage, color = series)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Minimum Wage ($)",
+  )
+```

@@ -1,0 +1,154 @@
+---
+title: "Data Science Capstone Project: Presentation 1"
+format: revealjs
+editor: visual
+execute:
+  message: false
+  warning: false
+---
+
+# Background Information!
+
+## As of 2026, California has: {style="color: deeppink"}
+
+-   \$16.90 statewide minimum wage
+
+    -   Adjusted for inflation based on the ***national*** consumer price index for urban wage earners and clerical workers (CPI-W)
+
+        -   Federal levels of inflation are often lower than the state's...
+
+-   40 cities/counties with higher wage ordinances
+
+-   \$20 minimum wage for fast food workers (AB1228)
+
+-   And more...
+
+## Wage Distribution
+
+```{r}
+# load in packages
+library(tidyverse)
+library(readr)
+library(readxl)
+
+## Index of ALL California Cities/Counties with wage variance
+
+# read in CSV file
+cali_wages <- read_csv("CaliforniaCityMinimumWages.csv")
+ggplot(cali_wages, aes(x = Rate, y = Locality, fill = grepl("Emeryville|West Hollywood", Locality))) +
+  geom_col() +
+  geom_text(aes(label = paste("$", format(round(Rate, 2)))),
+            hjust = -0.1,
+            size = 2.5) +
+  scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "grey60"), guide = "none") +
+  labs(
+    y = "California Cities",
+    x = "Minimum Wage Rates ($)",
+    title = "All California Cities with Wage Variance (2026)"
+  ) +
+  theme(
+    axis.text.y = element_text(size = 6)
+  )
+```
+
+# A Problem {style="color: deeppink"}
+
+Initiatives to continue raising the minimum wage annually exemplify that our statewide minimum wage is NOT high enough, but allowing cities to set their own wages can prove to be costly in other ways for Californians...
+
+-   Commuting for higher pay in minimum wage jobs
+
+    -   What's stopping somebody in Anaheim (\$16.90) from driving to LA (\$18.42) for a higher pay in the same job?
+
+    -   SoCal is home to the WORST commutes in America!
+
+# One Proposition {style="color: deeppink"}
+
+Set a baseline statewide minimum wage and increase annually based on CPI-W increases in California's Metropolitan Statistical Areas (MSAs) to ensure more accurate wage indexes.
+
+# Simulation Example
+
+```{r}
+# read in excel file 
+LA_MSA <- read_excel("LA_MSA.xlsx")
+# remove unnecessary rows
+newLA_df <- LA_MSA[-c(1:10), ] # now df displays CPI-W by month and year 
+
+# make year column as.numeric
+newLA_df[[1]] <- as.numeric(newLA_df[[1]], na.rm = TRUE)
+
+# create a function to calculate rates of changes for the past 5 years
+avg_function <- function(year) {
+  year_col <- newLA_df[[1]]
+  prev <- newLA_df[year_col == year - 1, 8:13]
+  now <- newLA_df[year_col == year, 2:7]
+  mean(as.numeric(c(unlist(prev), unlist(now))), na.rm = TRUE)
+}
+years <- 2022:2026 # the past 5 years
+
+# create a data frame using the rates from above
+rates <- data.frame(
+  year = years,
+  new_avg = sapply(years, avg_function),
+  old_avg = sapply(years - 1, avg_function)
+)
+rates$x <- rates$new_avg / rates$old_avg # calculate rates of change
+
+# calculate hypothetical minimum wages for the LA MSA area from 2022-2026
+year_one <- rates$x[1] * 14.00 # $14.00 was California's statewide minimum wage in 2021
+year_two <- rates$x[2] * year_one # 2023
+year_three <- rates$x[3] * year_two # 2024
+year_four <- rates$x[4] * year_three # 2025
+year_five <- rates$x[5] * year_four # 2026
+
+## create data frames for the hypothetical, California actual, and LA actual
+hypo_wagedf <- data.frame(
+  year = rates$year,
+  wage = c(year_one, year_two, year_three, year_four, year_five)
+) # hypothetical
+
+cali_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("15.00", "15.50", "16.00", "16.50", "16.90")
+) # california
+
+LA_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("16.04", "16.78", "17.28", "17.87", "18.42")
+) # LA
+
+# rename to create separate columns
+hypo_wagedf$series <- "Hypothetical"
+cali_wagedf$series <- "California"
+LA_wagedf$series <- "Los Angeles"
+
+# collapse into one data frame
+all_wages <- rbind(hypo_wagedf, cali_wagedf, LA_wagedf)
+all_wages$wage <- as.numeric(all_wages$wage) # convert wages from strings into numbers
+
+# line plot for all wages!
+ggplot(all_wages, aes(x = year, y = wage, color = series)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Minimum Wage ($)",
+  )
+
+```
+
+# Data Challenges {style="color: deeppink"}
+
+The Federal Government only provides MSA inflation data for a select few MSA locations in California:
+
+-   Los Angeles-Long Beach-Anaheim
+
+-   Riverside-San Bernardino-Ontario
+
+-   San Diego-Carlsbad
+
+-   San Francisco-Oakland-Hayward
+
+And some inflation data only records every other month...
+
+# Project Challenges {style="color: deeppink"}
+
+-   What to do when projected wages are significantly less than the wages already put in place?

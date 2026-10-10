@@ -1,0 +1,91 @@
+---
+title: "Section Draft"
+format: pdf
+editor: visual
+execute:
+  message: false
+  warning: false
+---
+
+# Simulation Section Draft
+
+In this section, I will simulate a hypothetical of what the minimum wage would look like in various California MSAs over the past five years (expanding from 2022 - 2026).
+
+Below, I've included the code for the Los Angeles-Long Beach-Anaheim MSA, the 2-3 other MSAs will be simulated with similar code. The end of each code will conclude with a line plot including the California minimum wage, the hypothetical MSA wage, and then any cities with variant wages. In the example shown, I've plotted the hypothetical, the California, and only LA's wages, since Anaheim and Long Beach both have wages that follow the state's wage annual adjustments.
+
+To calculate a new wage, I have to take the average inflation data from July to December from the year prior, and the data from January to June from the corresponding year. Then, I multiply this inflation rate by the wage for the previous year (in this case, I chose \$14.00 which was California's minimum wage in 2021). In this hypothetical, MSAs started to diverge from California's minimum wages in 2022.
+
+I would finalize my simulation section with a graph showing each MSA's hypothetical wage(s) compared to their actual wages. This may just be for the year of 2026.
+
+```{r}
+# load in packages
+library(tidyverse)
+library(readr)
+library(readxl)
+
+# read in excel file 
+LA_MSA <- read_excel("LA_MSA.xlsx")
+# remove unnecessary rows
+newLA_df <- LA_MSA[-c(1:10), ] # now df displays CPI-W by month and year 
+
+# make year column as.numeric
+newLA_df[[1]] <- as.numeric(newLA_df[[1]], na.rm = TRUE)
+
+# create a function to calculate rates of changes for the past 5 years
+avg_function <- function(year) {
+  year_col <- newLA_df[[1]]
+  prev <- newLA_df[year_col == year - 1, 8:13] # July to December
+  now <- newLA_df[year_col == year, 2:7] # February to June
+  mean(as.numeric(c(unlist(prev), unlist(now))), na.rm = TRUE)
+}
+years <- 2022:2026 # the past 5 years
+
+# create a data frame using the rates from above
+rates <- data.frame(
+  year = years,
+  new_avg = sapply(years, avg_function),
+  old_avg = sapply(years - 1, avg_function)
+)
+rates$x <- rates$new_avg / rates$old_avg # calculate rates of change
+
+# calculate hypothetical minimum wages for the LA MSA area from 2022-2026
+year_one <- rates$x[1] * 14.00 # $14.00 was California's statewide minimum wage in 2021
+year_two <- rates$x[2] * year_one # 2023
+year_three <- rates$x[3] * year_two # 2024
+year_four <- rates$x[4] * year_three # 2025
+year_five <- rates$x[5] * year_four # 2026
+
+## create data frames for the hypothetical, California actual, and LA actual
+hypo_wagedf <- data.frame(
+  year = rates$year,
+  wage = c(year_one, year_two, year_three, year_four, year_five)
+) # hypothetical
+
+cali_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("15.00", "15.50", "16.00", "16.50", "16.90")
+) # california
+
+LA_wagedf <- data.frame(
+  year = rates$year,
+  wage = c("16.04", "16.78", "17.28", "17.87", "18.42")
+) # LA
+
+# rename to create separate columns
+hypo_wagedf$series <- "Hypothetical"
+cali_wagedf$series <- "California"
+LA_wagedf$series <- "Los Angeles"
+
+# collapse into one data frame
+all_wages <- rbind(hypo_wagedf, cali_wagedf, LA_wagedf)
+all_wages$wage <- as.numeric(all_wages$wage) # convert wages from strings into numbers
+
+# line plot for all wages!
+ggplot(all_wages, aes(x = year, y = wage, color = series)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Minimum Wage ($)",
+  )
+
+```
