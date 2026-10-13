@@ -59,7 +59,7 @@ Initiatives to continue raising the minimum wage annually exemplify that our sta
 
     -   What's stopping somebody in Anaheim (\$16.90) from driving to LA (\$18.42) for a higher pay in the same job?
 
-    -   SoCal is home to the WORST commutes in America!
+    -   SoCal is home to one of the WORST commutes in America!
 
 # One Proposition {style="color: deeppink"}
 
@@ -132,7 +132,18 @@ ggplot(all_wages, aes(x = year, y = wage, color = series)) +
     x = "Year",
     y = "Minimum Wage ($)",
   )
+```
 
+# Simulation Example
+
+```{r}
+all_wages2 <- data.frame(
+  year = c("2022", "2023", "2024", "2025", "2026"),
+  California = c("15.00", "15.50", "16.00", "16.50", "16.90"),
+  LosAngeles = c("16.04", "16.78", "17.28", "17.87", "18.42"),
+  Hypothetical = c("14.95", "15.71", "16.15", "16.65", "17.23"))
+                
+all_wages2
 ```
 
 # Data Challenges {style="color: deeppink"}
