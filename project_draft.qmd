@@ -2,6 +2,7 @@
 title: "project draft"
 format: pdf
 editor: visual
+bibliography: capstone.bib
 execute:
   message: false
   warning: false
