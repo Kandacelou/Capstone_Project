@@ -99,6 +99,8 @@ print(wage_by_state)
 
 Therefore, only Denver and Nevada will now adhere to the federal minimum wage (\$15), while every other state will raise in proportion with cost-of-living data. State wages will now range from \$15 to \$27.60 - a wider gap (\$12.60), but more reflective of the needs of individual communities.
 
+## Comparing to State's Original Wages 
+
 ```{r}
 # create a function which scrapes the minimum wages from each state for 2026
 statewage_func <- function(state_names) {
