@@ -1,0 +1,29 @@
+---
+title: "Ethics Component"
+format: pdf
+editor: visual
+execute:
+  message: false
+  warning: false
+---
+
+# Web Scraping
+
+In order to obtain the data needed to develop a new baseline wage for every state in the U.S. based on their cost of living compared to the federal level, I had to web scrape from two websites: Salary.com and MinimumWage.com. However, to ethically collect this "publicly available data" from the internet, each website's resources and privacy rules must be respected. This can be accomplished by checking a website's robots.txt file to see whether the paths I am attempting to use are allowed. Such requests were passed below:
+
+```{r}
+# check permission to web scrape 
+library(robotstxt)
+paths_allowed("https://www.salary.com")
+paths_allowed("https://minimumwage.com")
+```
+
+Both paths passed as "TRUE," which grants me permission to use the data obtained from both websites. Although my Capstone project is not yet completed, I will continue to check the permissions via a website's robots.txt file for future data I intend to scrape.
+
+# Real World Implications of Minimum Wage Analysis
+
+Though in my initial analysis of the minimum wage rates for every state in the U.S. has suggested that over 90% of the region is underpaying their minimum wage earners, suddenly (and drastically) raising the minimum wage can be more harmful, than helpful, despite providing an "economic advantage" to such workers.
+
+For example, after the implementation of California's Assembly Bill 1228 (AB1228), which set the rates of certain fast food workers to \$20 an hour in 2021, the federal Bureau of Labor Statistics revealed a “staggering 36,565 fast food jobs \[had\] been lost since September 2023 when the \$20 per hour minimum wage law, AB 1228, was signed into law.” Similarly, as of April 1, 2025, “the Berkeley Research Group also found that fast food prices in California \[had\] gone up by 14.5% - about double the national average of 8.2%” and “89% of all restaurants in the state \[reduced\] employee hours to offset rising costs with, 87% planning additional cuts \[for 2026\]." These inflationary consequences have ultimately eroded voter confidence for increasing the minimum wage as well. Proposition 32 was on the ballot in California as an initiated state statute on November 5, 2024, but was defeated with a 50.71% No vote majority threshold. It would have increased the state minimum wage to \$18 an hour by 2026 for all employers. After reaching \$18, the minimum wage would have been tied to the CPI-W for inflation adjustments. Although early on, support for Prop 32 was high due to California’s high cost of living and high inflation being a key issue, with the “rising number of job losses tied to the fast food minimum wage hike, \[voters were worried\] that a statewide raise could lead to even more losses.” Jot Condie, President and CEO of the California Restaurant Association, noted after the failure of Prop 32 that “voters know who pays for wage mandates like Proposition 32 - they do.” Thus, the fear of further economic damage tied to another minimum wage increase resulted in the loss of a further wage increase. 
+
+Therefore, although I believe it to be unethical that the United States - the world's largest economy by nominal Gross Domestic Product (GDP) - is significantly underpaying their minimum wage workers, I believe it also to be true that it is unethical to cost jobs and economic stability for the sake of resolving this issue. Thus, this policy brief, which remains largely hypothetical, must also be paired with other remedies to incentivize businesses - specifically, the small business community - to not hike their prices or lay off employees in response to wage increases. One example would be to expand refundable tax credits for businesses at a state level, providing additional government assistance simultaneously with the minimum wage increases.

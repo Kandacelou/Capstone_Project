@@ -102,6 +102,11 @@ Therefore, only Denver and Nevada will now adhere to the federal minimum wage (\
 ## Comparing to State's Original Wages 
 
 ```{r}
+# check permission to web scrape 
+paths_allowed("https://minimumwage.com")
+```
+
+```{r}
 # create a function which scrapes the minimum wages from each state for 2026
 statewage_func <- function(state_names) {
   state_names <- gsub(" ", "-", state_names)
