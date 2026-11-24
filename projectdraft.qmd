@@ -1,0 +1,346 @@
+---
+title: "Project Draft"
+author: 
+  - name: "Kandace Loualhati"
+    affil: "Department of Data Science, Pomona College"
+date: "November 22, 2026"
+format: pdf
+editor: visual
+bibliography: capstone.bib
+execute:
+  echo: false
+  message: false
+  warning: false
+---
+
+\newpage
+
+# Introduction
+
+California annually adjusts the minimum wage for its workers to account for national inflation increases while actively combating our high cost of living. However, as prices continue to surge, our state and local governments tend to disagree with the rate at which our minimum wage should be. Therefore, although as of January 1st, 2026, the statewide minimum wage is \$16.90, local governments are able to determine their own rates as long as they meet that baseline - this results in variances ranging anywhere from \$16.90 to \$20.25, and will most likely continue to raise in years to come [@noauthor_inventory_nodate]. These discrepancies are specifically problematic due to the relationship of these higher wages and the economic affluence of an area; such that, the wages of most cities in California are not reflective of other economic factors, such as inflation and cost of living. This brief seeks to analyze the economic and social consequences of minimum wage increases from a city-centric lens. 
+
+Initiatives to continue raising the minimum wage annually exemplify that our statewide minimum wage is not enough to live comfortably in California; thus, the solution to the problems which stem from policy implementation (i.e., inflation, job losses, cutting hours, etc.) isn’t to cap the minimum wage, but to adjust the approach. Voter behavior suggests skepticism toward broader wage increases, as seen in a “no” vote to Proposition 32, which proposed raising the statewide minimum wage to \$18 by 2026 [@noauthor_california_nodate]. Therefore, California must set higher rates while incentivizing businesses to not hike their pieces - ultimately re-establishing voter confidence.
+
+## Hypothesis
+
+Currently, minimum wage adjustments account for annual inflation using the Consumer Price Index (CPI), which measures the average change over time in the prices paid by urban consumers for a basket of goods and services. But is this static basket accurate enough to set our individual wages? I argue that cost-of-living, which tracks actual expenses required to live (such as housing, taxes, healthcare, and other localized costs) across more specific regions is a better indicator of what wages should be. Thus, I propose setting a baseline statewide minimum wage and increasing annually based on cost-of-living in California cities, to ensure more accurate wage indexes, rather than using a federal level of inflation.
+
+## This Study
+
+Therefore, in this proposal I intend to first determine a new, hypothetical wage baseline for California, by attempting to resolve tensions at a national level for all states via a cost-of-living calculation (adjusting from the \$7.25 federal wage). The Cost of Living (COL) index that I will be using from Salary.com is based on data related to housing, food, healthcare, transportation, energy, and current salary data for thousands of jobs specific to a chosen location to provide a "more refined estimate of the cost of living variations."
+
+Second, I will use this state hypothetical wage to adjust California's local minimum wages, divided into their individual cities, via the same cost-of-living approach. I argue that these hypothetical wages are more economically accurate and representative of community needs, regardless of how realistic it may be to achieve.
+
+# 1. Setting the Minimum Wage Baseline by State
+
+Although this brief is pertaining to California as a separate entity, the question of "what is to be done with minimum wage?" still remains to be eagerly addressed in all states across the nation. There are 21 states that either match the federal minimum wage of \$7.25 per hour or have no minimum wage law (which still translates back to the federal wage) [@hirsch_21_2017]. Therefore, our nation's wages range from \$7.25 to \$17.13, depicting a \$10 wage gap for state governments unwilling to raise their wage rates above the federal law, despite their cost-of-living surpassing the national level.
+
+The federal minimum wage, however, is not indexed by the Consumer Price Index, which states use to justify raising their floors. In order to change the \$7.25 wage floor, which has been the wage since 2009, Congress would need to pass a new law signed by the President. But why do some states still adhere to this wage if it is not reflective of the current economy? 17 states stuck at this wage have passed "preemption" laws that strip cities of the power to raise wages.
+
+## Proportioning Wages to Cost-of-Living
+
+```{r}
+# read in packages
+library(tidyverse)
+library(rvest)
+library(purrr)
+library(readr)
+
+# create a function that scrapes the cost of living data per state from salary.com
+web_func <- function(state) {
+html <- paste0("https://www.salary.com/research/cost-of-living/", state)
+page <- read_html(html)
+quantity <- page |>
+  html_elements(".sal-adjustment-value") |>
+  html_text()
+direction <- page |>
+  html_elements(".sal-adjustment-label") |>
+  html_text()
+# return a tibble
+data <- tibble(
+  state = state,
+  quantity = parse_number(quantity), # quantity refers to how much higher (by %) a state's cost of living is compared to federal data
+) |>
+  mutate(
+    quantity = if_else(
+      str_detect(str_to_lower(direction), "lower than national avg."),
+                 -quantity,
+      quantity
+    )
+  )
+return(data)
+}
+
+# map the states and their quantity (defined above)
+dif_states <- c(state.abb)
+COL_by_state <- map(dif_states, web_func) |>
+  list_rbind()
+COL_by_state <- COL_by_state |>
+  mutate(quantity = paste0(quantity, "%"))
+
+COL_by_state <- as.data.frame(COL_by_state) |>
+  mutate(quantity = paste0(quantity, "%"))
+
+print(COL_by_state)
+```
+
+To begin my analysis, I web scraped data from Salary.com's cost of living calculator by state [@noauthor_salarycom_nodate]. I created a function which input the state's abbreviations into their website, and produced a data frame with 2 columns: state and quantity - with quantity referring to how much higher (in percentage) a state's cost of living is compared to the national level.
+
+This data frame depicts how there are 27 states that have a statewide cost of living which is lower than the federal level (depicted by a negative sign), while only two states (Nevada and Delaware) didn't have higher costs of living (0%) compared to the federal states. Therefore, only 2 out of the 50 states in America (only 4%) have "accurate" wage indexes. Thus, I suggest that we abolish the federal "minimum" wage and instead replace this value with a federal "adjustment" wage.
+
+These two states, however, have wages higher than \$7.25: Nevada has a minimum wage of \$12 and Delaware has a minimum wage of \$15. Although there is a \$3 difference between the two wages, it is intuitive that we should use the higher value - such that, the largest tension in the minimum wage debate is that it is not nearly high enough. So, instead, the new adjustment wage which states should use will be conducive to Delaware's: \$15.00 (a 2.07% increase). Note, however, that since this wage is no longer a "minimum," states that have a lower cost of living than the national average will have wages that are lower than this baseline. Nonetheless, by increasing the federal adjustment wage to \$15.00 using data from 2026, this measure will be more realistic for the modern economy, rather than maintaining an already established meager wage of \$7.25.
+
+```{r}
+# calculate new minimum wages by state 
+COL_by_state <- COL_by_state |>
+  mutate(quantity = parse_number(quantity))
+decimals <- (COL_by_state$quantity / 100) # convert percentages to decimals
+rate_of_change <- (decimals * 15) 
+new_wage <- (rate_of_change + 15)
+wage_by_state <- data.frame(
+  state = COL_by_state$state,
+  new_wage = paste0("$", new_wage)
+)
+print(wage_by_state)
+```
+
+Therefore, only Denver and Nevada will now adhere to the federal adjustment wage (\$15), while every other state will either increase or decrease in proportion with their corresponding cost-of-living data. State wages will now range from \$12.75 to \$27.60 - a wider gap (\$14.85), but more reflective of the needs of individual communities.
+
+## Comparing to State's Original Wages
+
+```{r}
+# create a function which scrapes the minimum wages from each state for 2026
+statewage_func <- function(state_names) {
+  state_names <- gsub(" ", "-", state_names)
+statewage_html <- paste0("https://minimumwage.com/state/", state_names, "/")
+statewage_page <- read_html(statewage_html)
+min_wage <- statewage_page |>
+    html_elements(".big-number") |>
+    html_text()
+
+# return a tibble
+statewage <- tibble(
+  state = state_names,
+  actual_wage = min_wage
+  )
+
+  return(statewage)
+}
+# lowercase state names to correspond to website format 
+state_names <- tolower(state.name)
+
+# map the states and their actual wages for 2026 
+minwage_by_state <- map(state_names, statewage_func) |>
+  list_rbind() |>
+  mutate(actual_wage = str_extract(actual_wage, "\\$[0-9]+\\.[0-9]{2}")) |>
+  distinct(state, .keep_all = TRUE)
+```
+
+```{r}
+# calculate how much greater (in %) the new, hypothetical wages are compared to actual 
+old_wage <- parse_number(minwage_by_state$actual_wage)
+
+state_wages <- data.frame(
+  state = state_names,
+  actual_wage = minwage_by_state$actual_wage,
+  new_wage = paste0("$", new_wage),
+  difference = paste(round((new_wage - old_wage), digits = 2))
+)
+
+print(state_wages)
+```
+
+To compare the hypothetical minimum wages per state, I web scraped the actual 2026 wage rates by state from Minimumwage.com [@noauthor_minimumwagecom_nodate]. Similar to the hypothetical simulation, I created a function which input the state's name, and produced a tibble with two columns: state and "actual_wage." After this was accomplished, I joined the actual wages and the hypothetical wages ("new_wage") to develop a new tibble to directly visualize the differences.
+
+This table suggests that most states are severely underpaying their minimum wage earners (45 out of the 50 states in America, or 90%). On average, the United States are underpaying their minimum wage earners by \$4.22. However, Connecticut, Illinois, Missouri, Nebraska, and Washington are all overpaying their workers. These rates vary from overpaying slightly at \$0.14 (Connecticut) to \$1.80 (Missouri).
+
+Thus, in the upcoming section, California's new statewide wage floor will be \$21.30, rather than \$16.90
+
+\newpage
+
+# 2. Setting Minimum Wage Rates by California City
+
+## Proportioning Wages to Cost of Living 
+
+```{r}
+# scrape California city list
+city_html <- read_html("https://www.salary.com/research/cost-of-living/ca")
+
+# extract city names
+city_names <- city_html |>
+  html_elements(".margin-top50 .sa-salarylist-title , #sa-table-compare-category a") |>
+  html_text(trim = TRUE)
+
+# create tibble
+city_list <- tibble(
+  city = city_names
+) |>
+  mutate(
+    city = str_remove(city, ", California")) |>
+  filter(city != "") |>
+  distinct()
+
+
+# create a function which scrapes minimum wages
+citywage_func <- function() {
+
+  citywage_html <- "https://laborcenter.berkeley.edu/inventory-of-us-city-and-county-minimum-wage-ordinances"
+
+  citywage_page <- read_html(citywage_html)
+
+  berkeley_city_names <- citywage_page |>
+    html_elements(".row-hover .column-1") |>
+    html_text(trim = TRUE)
+
+  city_min_wage <- citywage_page |>
+    html_elements(".row-hover .column-3") |>
+    html_text(trim = TRUE)
+
+  # return a tibble
+  citywage <- tibble(
+    city = berkeley_city_names,
+    city_actual_wage = readr::parse_number(city_min_wage)
+  )
+
+  return(citywage)
+}
+
+# save Berkeley wage data
+city_wages <- citywage_func()
+
+
+# join the datasets
+city_minimum_wages <- city_list |>
+  left_join(city_wages, by = "city") |>
+  mutate(
+    city_actual_wage = paste0("$", coalesce(city_actual_wage, 16.90)
+  )
+)
+city_minimum_wages <- as.data.frame(city_minimum_wages)
+
+print(city_minimum_wages)
+```
+
+This table depicts how setting California's more accurate statewide minimum wage to \$21.30 results in every city appearing to "underpay" their minimum wage earners. This aligns with our predictions due to California estimating this wage by the federal level of inflation, rather than a more localized measure. Thus, even if it may not be immediately feasible to completely restructure California's minimum wages to be based on regional COL data, raising the overall baseline is a good first step to this state's wages becoming more precise and reflective of the needs of their distinct communities.
+
+Unlike the federal wage data, however, the \$21.30 baseline will not become an "adjustment" figure. Instead, I propose that states should still have a "minimum" wage - using the numerical values calculated in the previous section - and cities with COL indexes lower than that rate will still adhere to this minimum. This will help limit local government's attempts to maintain low wages - this, for example, could potentially be distorted by reporting inaccurate cost-of-living data in order to maintain low wages. Due to California having 77 cities in the state, these figures could be easily manipulated without as much broadcast as there would be at a state level.
+
+```{r}
+# create a function that scrapes the cost of living data per California city from salary.com
+calicity_func <- function(cali_city) {
+  city_url <- str_replace_all(cali_city, " ", "-")
+html <- paste0("https://www.salary.com/research/cost-of-living/", city_url, "-ca")
+page <- read_html(html)
+city_quantity <- page |>
+  html_elements(".sal-adjustment-divider+ .sal-adjustment-block .sal-adjustment-value") |>
+  html_text()
+direction <- page |>
+  html_elements(".sal-adjustment-divider+ .sal-adjustment-block .sal-adjustment-label") |>
+  html_text()
+# return a tibble
+data <- tibble(
+  city = cali_city,
+  city_quantity = parse_number(city_quantity), # quantity refers to how much higher (by %) a city's cost of living is compared to state data
+) |>
+  mutate(
+    city_quantity = if_else(
+      str_detect(str_to_lower(direction), "lower than state avg."),
+                 -city_quantity,
+      city_quantity
+    )
+)
+}
+# map the cities and their quantity (defined above)
+COL_by_city <- map(city_list$city, calicity_func) |>
+  list_rbind()
+
+COL_by_city <- as.data.frame(COL_by_city) |>
+  mutate(city_quantity = paste0(city_quantity, "%"))
+
+print(COL_by_city)
+```
+
+These values suggest that 44 out of the 77 cities (approximately 57%) in California have cost-of-living rates that are lower than the state average (depicted by a negative sign), while no state is at 0%. Only the remaining 43% (33 out of the 77 cities) having COL indexes which are higher than California's average percentage presents a new issue, in which there is a disproportionate amount of wealth in less than half the state contributing to California's high costs. If this measurement via cost-of-living data were to be adopted into California legislature, I would suggest a cap on such costs to prevent this disproportion which unevenly distributes itself across the state.
+
+```{r}
+# calculate new minimum wages by city
+COL_by_city <- COL_by_city |>
+  mutate(city_quantity = parse_number(city_quantity))
+city_decimals <- (COL_by_city$city_quantity / 100) # convert percentages to decimals
+city_rate_of_change <- (city_decimals * 21.30) 
+city_new_wage <- (city_rate_of_change + 21.30)
+city_new_wage <- pmax(city_new_wage, 21.30)
+city_new_wage <- round(city_new_wage, 2)
+wage_by_city <- data.frame(
+  city = COL_by_city$city,
+  new_wage = paste0("$", city_new_wage)
+)
+print(wage_by_city)
+```
+
+To calculate the new hypothetical wages for each California city, I copied the same method used for the statewide adjustments. I first calculated the rate of change, added that by the new adjustment figure of \$21.30, and then set that rate of \$21.30 as the statewide minimum wage - such that no cities can have wages that are lower than this rate. There are 43 states that adhere to this minimum wage; however, some of the larger cities in California (such as San Francisco) can have minimum wage rates that are more than double that wage. Therefore, California's hypothetical minimum wages would range from \$21.30 to \$45.16 (a \$23.14 difference), with the average minimum wage being approximately \$24.
+
+## Comparing to City's Original Wages 
+
+```{r}
+# calculate the difference between hypothetical and actual wages
+all_city_wages <- data.frame(
+  city = city_minimum_wages$city,
+  city_actual_wage = city_minimum_wages$city_actual_wage,
+  new_wage = paste0("$",wage_by_city$new_wage),
+  difference = paste0(
+    "$",
+    round(
+      as.numeric(gsub("\\$", "", wage_by_city$new_wage)) -
+        as.numeric(city_wages$city_actual_wage),
+      digits = 2
+    )
+  )
+)
+
+print(all_city_wages)
+```
+
+On average, California cities are underpaying their minimum wage earners by approximately \$5.57; however, some cities, such as San Francisco again, appear to be underpaying their workers by over \$27.00. Note that no cities can be overpaying their workers, since the baseline was already higher than every city's wages.
+
+These values further strengthen my argument that the minimum wage, at both a state, but more specifically a city/regional level, must be more localized to adhere to specific needs.
+
+# 3. Ethical Concerns
+
+## Web Scraping
+
+In order to obtain the data needed to develop a new baseline wage for every state in the U.S. based on their cost of living compared to the federal level, I had to web scrape from two websites: Salary.com and MinimumWage.com. However, to ethically collect this "publicly available data" from the internet, each website's resources and privacy rules must be respected. This can be accomplished by checking a website's robots.txt file to see whether the paths I am attempting to use are allowed. Such requests were passed below:
+
+```{r}
+# check permission to web scrape 
+library(robotstxt)
+paths_allowed("https://www.salary.com")
+paths_allowed("https://minimumwage.com")
+paths_allowed("https://laborcenter.berkeley.edu/inventory-of-us-city-and-county-minimum-wage-ordinances")
+```
+
+All paths passed as "TRUE," which grants me permission to use the data obtained from both websites.
+
+## Real World Implications of Minimum Wage Analysis
+
+Though in my initial analysis of the minimum wage rates for every state in the U.S. has suggested that over 90% of the region is underpaying their minimum wage earners, suddenly (and drastically) raising the minimum wage can be more harmful, than helpful, despite providing an "economic advantage" to such workers.
+
+For example, after the implementation of California's Assembly Bill 1228 (AB1228), which set the rates of certain fast food workers to \$20 an hour in 2021, the federal Bureau of Labor Statistics revealed a “staggering 36,565 fast food jobs \[had\] been lost since September 2023 when the \$20 per hour minimum wage law, AB 1228, was signed into law.” Similarly, as of April 1, 2025, “the Berkeley Research Group also found that fast food prices in California \[had\] gone up by 14.5% - about double the national average of 8.2%” and “89% of all restaurants in the state \[reduced\] employee hours to offset rising costs with, 87% planning additional cuts \[for 2026\]." These inflationary consequences have ultimately eroded voter confidence for increasing the minimum wage as well. Proposition 32 was on the ballot in California as an initiated state statute on November 5, 2024, but was defeated with a 50.71% No vote majority threshold. It would have increased the state minimum wage to \$18 an hour by 2026 for all employers. After reaching \$18, the minimum wage would have been tied to the CPI-W for inflation adjustments. Although early on, support for Prop 32 was high due to California’s high cost of living and high inflation being a key issue, with the “rising number of job losses tied to the fast food minimum wage hike, \[voters were worried\] that a statewide raise could lead to even more losses.” Jot Condie, President and CEO of the California Restaurant Association, noted after the failure of Prop 32 that “voters know who pays for wage mandates like Proposition 32 - they do.” Thus, the fear of further economic damage tied to another minimum wage increase resulted in the loss of a further wage increase. 
+
+Therefore, although I believe it to be unethical that the United States - the world's largest economy by nominal Gross Domestic Product (GDP) - is significantly underpaying their minimum wage workers, I believe it also to be true that it is unethical to cost jobs and economic stability for the sake of resolving this issue. Thus, this policy brief, which remains largely hypothetical, must also be paired with other remedies to incentivize businesses - specifically, the small business community - to not hike their prices or lay off employees in response to wage increases. One example would be to expand refundable tax credits for businesses at a state level, providing additional government assistance simultaneously with the minimum wage increases.
+
+## Data Limitations 
+
+Salary.com was selected as the primary source for cost-of-living data because it was the only source identified that provided estimates for all 77 California cities in this study, rather than focusing only on larger cities. This broader coverage allowed for a more complete comparison of cost-of-living differences across the state.
+
+However, the accuracy of every estimate could not be independently verified. Some values appeared unusually high or low, but they cannot automatically be considered errors. These figures may reflect genuine differences in local living costs. Therefore, I chose to retain the reported data rather than remove observations based on their magnitude alone. This approach avoids introducing personal bias into the analysis. Ultimately, the results should be interpreted as estimates based on Salary.com's data, not definitive measurements of each city's actual cost of living.
+
+# 4. Conclusion
+
+This study highlights four important concerns with using a uniform minimum wage: the gap between actual and hypothetical state minimum wages, the wide variation in modeled wages across states, the differences in cost of living among California cities, and the resulting variation in hypothetical city minimum wages. At the state level, 45 of 50 states had actual minimum wages below the rates proposed by the model, with hypothetical wages ranging from \$12.75 to \$27.60. Within California, 33 of the 77 cities had cost-of-living estimates above the state average, while 44 were below it. Applying these differences produced hypothetical city wages ranging from \$21.30 to \$45.16.
+
+Although these findings suggest that minimum wages could better account for regional living costs, the results must be interpreted with caution. Potential inaccuracies or unusual values in Salary.com's data may have influenced the calculations. Nevertheless, the analysis demonstrates that living expenses vary substantially across geographic areas and that a uniform wage may not adequately reflect those differences. Ultimately, this study supports further research into cost-of-living-based minimum wage policies and the use of more comprehensive, independently verified data to inform future wage recommendations.
+
+\newpage
+
+# References
