@@ -160,7 +160,7 @@ Thus, in the upcoming section, California's new statewide wage floor will be \$2
 
 # 2. Setting Minimum Wage Rates by California City
 
-## Proportioning Wages to Cost of Living 
+## Proportioning Wages to Cost of Living
 
 ```{r}
 # scrape California city list
@@ -280,7 +280,7 @@ print(wage_by_city)
 
 To calculate the new hypothetical wages for each California city, I copied the same method used for the statewide adjustments. I first calculated the rate of change, added that by the new adjustment figure of \$21.30, and then set that rate of \$21.30 as the statewide minimum wage - such that no cities can have wages that are lower than this rate. There are 43 states that adhere to this minimum wage; however, some of the larger cities in California (such as San Francisco) can have minimum wage rates that are more than double that wage. Therefore, California's hypothetical minimum wages would range from \$21.30 to \$45.16 (a \$23.14 difference), with the average minimum wage being approximately \$24.
 
-## Comparing to City's Original Wages 
+## Comparing to City's Original Wages
 
 ```{r}
 # calculate the difference between hypothetical and actual wages
@@ -304,6 +304,8 @@ print(all_city_wages)
 On average, California cities are underpaying their minimum wage earners by approximately \$5.57; however, some cities, such as San Francisco again, appear to be underpaying their workers by over \$27.00. Note that no cities can be overpaying their workers, since the baseline was already higher than every city's wages.
 
 These values further strengthen my argument that the minimum wage, at both a state, but more specifically a city/regional level, must be more localized to adhere to specific needs.
+
+\newpage
 
 # 3. Ethical Concerns
 
@@ -329,11 +331,13 @@ For example, after the implementation of California's Assembly Bill 1228 (AB1228
 
 Therefore, although I believe it to be unethical that the United States - the world's largest economy by nominal Gross Domestic Product (GDP) - is significantly underpaying their minimum wage workers, I believe it also to be true that it is unethical to cost jobs and economic stability for the sake of resolving this issue. Thus, this policy brief, which remains largely hypothetical, must also be paired with other remedies to incentivize businesses - specifically, the small business community - to not hike their prices or lay off employees in response to wage increases. One example would be to expand refundable tax credits for businesses at a state level, providing additional government assistance simultaneously with the minimum wage increases.
 
-## Data Limitations 
+## Data Limitations
 
 Salary.com was selected as the primary source for cost-of-living data because it was the only source identified that provided estimates for all 77 California cities in this study, rather than focusing only on larger cities. This broader coverage allowed for a more complete comparison of cost-of-living differences across the state.
 
 However, the accuracy of every estimate could not be independently verified. Some values appeared unusually high or low, but they cannot automatically be considered errors. These figures may reflect genuine differences in local living costs. Therefore, I chose to retain the reported data rather than remove observations based on their magnitude alone. This approach avoids introducing personal bias into the analysis. Ultimately, the results should be interpreted as estimates based on Salary.com's data, not definitive measurements of each city's actual cost of living.
+
+\newpage
 
 # 4. Conclusion
 
